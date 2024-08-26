@@ -11,6 +11,12 @@ kernelspec:
 
 # Folium
 
+```{code-cell} ipython3
+from IPython.display import Image
+Image(filename='imagenes/folium.png', width=300, height=100)
+```
+
+
 ## Creando un mapa
 
 A continuación mostramos un ejemplo básico de creación de un mapa:

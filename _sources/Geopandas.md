@@ -12,6 +12,13 @@ kernelspec:
 # Geopandas
 
 ```{code-cell} ipython3
+from IPython.display import Image
+Image(filename='imagenes/geopandas.png', width=300, height=100)
+```
+
+
+
+```{code-cell} ipython3
 import ee
 import numpy
 import geopandas as gpd
@@ -37,7 +44,7 @@ ejidos.head(3)
 
 ```{code-cell} ipython3
 ejidos = ejidos.set_index("EJL_NOMBRE")
-ejidos
+ejidos.tail(3)
 ```
 
 

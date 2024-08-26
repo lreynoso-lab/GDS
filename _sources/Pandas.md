@@ -11,6 +11,12 @@ kernelspec:
 
 # Pandas
 
+```{code-cell} ipython3
+from IPython.display import Image
+Image(filename='imagenes/pandas.png', width=300, height=100)
+```
+
+
 ## Introducción
 
 Una de las librerías mas populares para trabajar con datos es:

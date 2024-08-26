@@ -11,6 +11,11 @@ kernelspec:
 
 # GEE
 
+```{code-cell} ipython3
+from IPython.display import Image
+Image(filename='imagenes/GEE.png', width=300, height=150)
+```
+
 ## Introducción
 
 
