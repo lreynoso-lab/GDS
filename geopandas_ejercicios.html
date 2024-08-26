@@ -1,0 +1,3663 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Geopandas &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'geopandas_ejercicios';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pandas.html">Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Geopandas.html">Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Matplotlib.html">Plot</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Folium.html">Folium</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="ee.html">GEE</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgeopandas_ejercicios.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/geopandas_ejercicios.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Geopandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="geopandas">
+<h1>Geopandas<a class="headerlink" href="#geopandas" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ee</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;D:\jupyterBook\cdg\archivos\ejidos.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_NOMBRE</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>56</td>
+      <td>SAUZAL BONITO</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2504910.702 5743581.368, 25049...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>29</td>
+      <td>VILLA LA ANGOSTURA</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 11287/48</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2274351.75 5487270.5, 2274385 548722...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>38</td>
+      <td>LAS LAJAS</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2393072.25 5734869, 2393175.5 573030...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># de igual forma, con la misma función gpd.read_file() se pueden leer archivos .zip, .gml </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;EJL_NOMBRE&quot;</span><span class="p">)</span>
+<span class="n">ejidos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+    </tr>
+    <tr>
+      <th>EJL_NOMBRE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAUZAL BONITO</th>
+      <td>56</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2504910.702 5743581.368, 25049...</td>
+    </tr>
+    <tr>
+      <th>VILLA LA ANGOSTURA</th>
+      <td>29</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 11287/48</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2274351.75 5487270.5, 2274385 548722...</td>
+    </tr>
+    <tr>
+      <th>LAS LAJAS</th>
+      <td>38</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2393072.25 5734869, 2393175.5 573030...</td>
+    </tr>
+    <tr>
+      <th>AÑELO</th>
+      <td>36</td>
+      <td>2</td>
+      <td>DECRETO PROVINCIAL N 1109/73</td>
+      <td>None</td>
+      <td>6</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2508978.75 5748766, 2509042.25 57574...</td>
+    </tr>
+    <tr>
+      <th>QUILI MALAL</th>
+      <td>37</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2417448.602 5756111.094, 2417515.277...</td>
+    </tr>
+    <tr>
+      <th>BAJADA DEL AGRIO</th>
+      <td>17</td>
+      <td>3</td>
+      <td>DECRETO NACIONAL N 12625/52</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2408212.817 5748352.05, 2408249.865 ...</td>
+    </tr>
+    <tr>
+      <th>AGUADA SAN ROQUE</th>
+      <td>55</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>6</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2521130 5804885, 2521652.75 5801216,...</td>
+    </tr>
+    <tr>
+      <th>VILLA TRAFUL</th>
+      <td>44</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 0768/69</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2289343.111 5499831.69, 2289354 5499...</td>
+    </tr>
+    <tr>
+      <th>HUINGANCO</th>
+      <td>49</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2322/00</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2353614.298 5894276.248, 2353579.902...</td>
+    </tr>
+    <tr>
+      <th>VARVARCO</th>
+      <td>50</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2352979.182 5948948.267, 2352912.507...</td>
+    </tr>
+    <tr>
+      <th>MANZANO AMARGO</th>
+      <td>52</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2346744 5924003, 2346335.5 5924379.5...</td>
+    </tr>
+    <tr>
+      <th>ANDACOLLO</th>
+      <td>16</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2321</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2353537.5 5893917, 2353644.25 589428...</td>
+    </tr>
+    <tr>
+      <th>COPAHUE-CAVIAHUE</th>
+      <td>45</td>
+      <td>3</td>
+      <td>DECRETO PROVINCIAL N 2796/96</td>
+      <td>None</td>
+      <td>4</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2318788.415 5807801.773, 23187...</td>
+    </tr>
+    <tr>
+      <th>VILLA PEHUENIA</th>
+      <td>41</td>
+      <td>2</td>
+      <td>DECRETO PROVINCIAL N 0367/96</td>
+      <td>None</td>
+      <td>12</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2322362.018 5684817.825, 2322290.93 ...</td>
+    </tr>
+    <tr>
+      <th>SAN PATRICIO DEL CHAÑAR</th>
+      <td>5</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>6</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2544874.25 5737644.5, 2545662.5 5736...</td>
+    </tr>
+    <tr>
+      <th>PILO LIL</th>
+      <td>1</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>11</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2338503 5607762.5, 2338504.632 56077...</td>
+    </tr>
+    <tr>
+      <th>PLAZA HUINCUL</th>
+      <td>8</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2482495.25 5684768, 2481489.25 56905...</td>
+    </tr>
+    <tr>
+      <th>CENTENARIO</th>
+      <td>32</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 3332</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2576880.874 5705545.452, 25769...</td>
+    </tr>
+    <tr>
+      <th>RINCON DE LOS SAUCES</th>
+      <td>33</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 2095/95</td>
+      <td>None</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2545877.5 5847160, 2535891.5 5847262...</td>
+    </tr>
+    <tr>
+      <th>CUTRAL CO</th>
+      <td>7</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2481111.75 5692743.5, 2481365.5 5691...</td>
+    </tr>
+    <tr>
+      <th>EL SAUCE</th>
+      <td>9</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>10</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2464575.5 5625854, 2464806.75 562562...</td>
+    </tr>
+    <tr>
+      <th>PICUN LEUFU</th>
+      <td>10</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>10</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2471530.75 5618883, 2466960.5 562346...</td>
+    </tr>
+    <tr>
+      <th>LAS COLORADAS</th>
+      <td>11</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>11</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2366804.5 5606870.5, 2361806.25 5606...</td>
+    </tr>
+    <tr>
+      <th>SANTO TOMAS</th>
+      <td>12</td>
+      <td>4</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>14</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2413527 5584793.5, 2409951.5 5581286...</td>
+    </tr>
+    <tr>
+      <th>PLOTTIER</th>
+      <td>31</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2555986.217 5683098.62, 2555920.071 ...</td>
+    </tr>
+    <tr>
+      <th>SENILLOSA</th>
+      <td>40</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 24597/51</td>
+      <td>LEY PROVINCIAL N 2405/02</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2515665.596 5722247.215, 2515676.179...</td>
+    </tr>
+    <tr>
+      <th>VILLA EL CHOCON</th>
+      <td>6</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 769/73</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2521525 5654200, 2521646 5654017.5, ...</td>
+    </tr>
+    <tr>
+      <th>ALUMINE</th>
+      <td>43</td>
+      <td>2</td>
+      <td>DECRETO NACIONAL N 12828/53</td>
+      <td>None</td>
+      <td>12</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2338903.5 5650710.5, 2330903.5 56507...</td>
+    </tr>
+    <tr>
+      <th>COVUNCO ABAJO</th>
+      <td>58</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2420089.638 5721613.113, 2420081.171...</td>
+    </tr>
+    <tr>
+      <th>GUAÑACOS</th>
+      <td>13</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 0308/00</td>
+      <td>LEY PROVINCIAL N 2322/00</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2310907.967 5879406.081, 2348276 587...</td>
+    </tr>
+    <tr>
+      <th>SAN MARTIN DE LOS ANDES</th>
+      <td>18</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 2052/94</td>
+      <td>None</td>
+      <td>15</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2297971.25 5562786, 2297985.17 55654...</td>
+    </tr>
+    <tr>
+      <th>VILLA LAGO MELIQUINA</th>
+      <td>24</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL 2096/07</td>
+      <td>DECRETO PROVINCIAL 0052/11</td>
+      <td>15</td>
+      <td>MIGRA</td>
+      <td>mpaz</td>
+      <td>I</td>
+      <td>2015-11-12</td>
+      <td>2023/08/25</td>
+      <td>POLYGON ((2307274.384 5529452.078, 2307935 553...</td>
+    </tr>
+    <tr>
+      <th>JUNIN DE LOS ANDES</th>
+      <td>42</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL 29006</td>
+      <td>LEY PROVINCIAL N 2341</td>
+      <td>13</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2323170.862 5563973.503, 2323139.112...</td>
+    </tr>
+    <tr>
+      <th>LOS MICHES</th>
+      <td>14</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2340/00</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2310907.967 5879406.081, 2310922.463...</td>
+    </tr>
+    <tr>
+      <th>VILLA DEL NAHUEVE</th>
+      <td>15</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 3125/99</td>
+      <td>None</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2320279.5 5919614.5, 2320420.634 591...</td>
+    </tr>
+    <tr>
+      <th>LAS OVEJAS</th>
+      <td>19</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2389/02</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2349096.75 5911740, 2349549.29 59116...</td>
+    </tr>
+    <tr>
+      <th>PIEDRA DEL AGUILA</th>
+      <td>27</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>14</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2400909.75 5562474.5, 2400909.75 556...</td>
+    </tr>
+    <tr>
+      <th>EL CHOLAR</th>
+      <td>20</td>
+      <td>3</td>
+      <td>DECRETO PROVINCIAL N 0765/60</td>
+      <td>None</td>
+      <td>4</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2355750.25 5857467, 2355653.75 58494...</td>
+    </tr>
+    <tr>
+      <th>EL HUECU</th>
+      <td>21</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>4</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2363886.25 5831115.5, 2359132 582525...</td>
+    </tr>
+    <tr>
+      <th>TAQUIMILAN</th>
+      <td>22</td>
+      <td>3</td>
+      <td>DECRETO PROVINCIAL N 0769/69</td>
+      <td>None</td>
+      <td>4</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2385381 5843805.5, 2384880.75 583381...</td>
+    </tr>
+    <tr>
+      <th>LONCOPUE</th>
+      <td>23</td>
+      <td>2</td>
+      <td>DECRETO NACIONAL S/N 1931</td>
+      <td>None</td>
+      <td>5</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2361149 5788726.5, 2361049.5 5768727...</td>
+    </tr>
+    <tr>
+      <th>COYUCO-COCHICO</th>
+      <td>2</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>2</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2377127.252 5978784.5, 2379302.015 5...</td>
+    </tr>
+    <tr>
+      <th>VILLA DEL CURI LEUVU</th>
+      <td>51</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>2</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2376516.99 5890559.145, 2376578 5890...</td>
+    </tr>
+    <tr>
+      <th>TRICAO MALAL</th>
+      <td>48</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>2</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2376490.5 5896794, 2371530.75 589679...</td>
+    </tr>
+    <tr>
+      <th>CHORRIACA</th>
+      <td>53</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>5</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2405270.5 5778247.5, 2405212.25 5778...</td>
+    </tr>
+    <tr>
+      <th>LOS CHIHUIDOS</th>
+      <td>54</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>6</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2436828.75 5827378, 2437281.25 58247...</td>
+    </tr>
+    <tr>
+      <th>PASO AGUERRE</th>
+      <td>57</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>10</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2443731.25 5647561.5, 2442313 564617...</td>
+    </tr>
+    <tr>
+      <th>VISTA ALEGRE</th>
+      <td>4</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 2026/93</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2569433.614 5715433.11, 2569492.881 ...</td>
+    </tr>
+    <tr>
+      <th>NEUQUEN</th>
+      <td>30</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2569098.384 5691099.793, 2572714.96 ...</td>
+    </tr>
+    <tr>
+      <th>ZAPALA</th>
+      <td>39</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2298/99</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2419375.75 5697158.5, 2418548.5 5696...</td>
+    </tr>
+    <tr>
+      <th>CHOS MALAL</th>
+      <td>47</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 99268/37</td>
+      <td>None</td>
+      <td>2</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2381861.728 5863390.576, 2382233.5 5...</td>
+    </tr>
+    <tr>
+      <th>MARIANO MORENO</th>
+      <td>46</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2403065.066 5706747.191, 2403077.861...</td>
+    </tr>
+    <tr>
+      <th>LOS CATUTOS</th>
+      <td>3</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2403065.066 5706747.191, 24080...</td>
+    </tr>
+    <tr>
+      <th>VILLA PUENTE PICUN LEUFU</th>
+      <td>25</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2409221.409 5655705.347, 2409217.391...</td>
+    </tr>
+    <tr>
+      <th>VILLA PUENTE PICUN LEUFU</th>
+      <td>59</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>11</td>
+      <td>mpaz</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2023-08-25</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2409221.409 5655705.347, 2409220 565...</td>
+    </tr>
+    <tr>
+      <th>RAMON CASTRO</th>
+      <td>28</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2434685 5706534.5, 2434734.75 570648...</td>
+    </tr>
+    <tr>
+      <th>OCTAVIO PICO</th>
+      <td>26</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2548509.142 5845834.704, 2548592.422...</td>
+    </tr>
+    <tr>
+      <th>BUTA RANQUIL</th>
+      <td>34</td>
+      <td>2</td>
+      <td>DECRETO NACIONAL S/N 1931</td>
+      <td>LEY PROVINCIAL N 2299/99</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2430817.706 5907859.255, 2430820.881...</td>
+    </tr>
+    <tr>
+      <th>BARRANCAS</th>
+      <td>35</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 2366/01</td>
+      <td>None</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2406467.509 5908504.5, 2406560.75 59...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+    </tr>
+    <tr>
+      <th>EJL_NOMBRE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAUZAL BONITO</th>
+      <td>56</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2504910.702 5743581.368, 25049...</td>
+    </tr>
+    <tr>
+      <th>VILLA LA ANGOSTURA</th>
+      <td>29</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 11287/48</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2274351.75 5487270.5, 2274385 548722...</td>
+    </tr>
+    <tr>
+      <th>LAS LAJAS</th>
+      <td>38</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2393072.25 5734869, 2393175.5 573030...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+    </tr>
+    <tr>
+      <th>EJL_NOMBRE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>OCTAVIO PICO</th>
+      <td>26</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2548509.142 5845834.704, 2548592.422...</td>
+    </tr>
+    <tr>
+      <th>BUTA RANQUIL</th>
+      <td>34</td>
+      <td>2</td>
+      <td>DECRETO NACIONAL S/N 1931</td>
+      <td>LEY PROVINCIAL N 2299/99</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2430817.706 5907859.255, 2430820.881...</td>
+    </tr>
+    <tr>
+      <th>BARRANCAS</th>
+      <td>35</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 2366/01</td>
+      <td>None</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2406467.509 5908504.5, 2406560.75 59...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;AREA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">area</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+      <th>AREA</th>
+    </tr>
+    <tr>
+      <th>EJL_NOMBRE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAUZAL BONITO</th>
+      <td>56</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2504910.702 5743581.368, 25049...</td>
+      <td>1.851751e+08</td>
+    </tr>
+    <tr>
+      <th>VILLA LA ANGOSTURA</th>
+      <td>29</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 11287/48</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2274351.75 5487270.5, 2274385 548722...</td>
+      <td>7.934321e+07</td>
+    </tr>
+    <tr>
+      <th>LAS LAJAS</th>
+      <td>38</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2393072.25 5734869, 2393175.5 573030...</td>
+      <td>8.600705e+07</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;AREA&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EJL_NOMBRE
+SAUZAL BONITO               1.851751e+08
+VILLA LA ANGOSTURA          7.934321e+07
+LAS LAJAS                   8.600705e+07
+AÑELO                       8.618311e+07
+QUILI MALAL                 3.692401e+08
+BAJADA DEL AGRIO            8.531626e+07
+AGUADA SAN ROQUE            1.417109e+09
+VILLA TRAFUL                7.056979e+07
+HUINGANCO                   3.014459e+08
+VARVARCO                    6.887802e+08
+MANZANO AMARGO              6.353362e+08
+ANDACOLLO                   3.383383e+08
+COPAHUE-CAVIAHUE            3.196155e+06
+VILLA PEHUENIA              1.534339e+08
+SAN PATRICIO DEL CHAÑAR     9.643916e+07
+PILO LIL                    4.779059e+07
+PLAZA HUINCUL               7.874095e+07
+CENTENARIO                  1.301019e+08
+RINCON DE LOS SAUCES        9.788575e+08
+CUTRAL CO                   8.060311e+07
+EL SAUCE                    3.451968e+08
+PICUN LEUFU                 1.386720e+08
+LAS COLORADAS               8.000675e+07
+SANTO TOMAS                 8.752750e+07
+PLOTTIER                    1.428481e+08
+SENILLOSA                   1.430489e+09
+VILLA EL CHOCON             7.797920e+07
+ALUMINE                     8.000000e+07
+COVUNCO ABAJO               5.894167e+08
+GUAÑACOS                    5.988409e+08
+SAN MARTIN DE LOS ANDES     1.447529e+08
+VILLA LAGO MELIQUINA        1.079979e+08
+JUNIN DE LOS ANDES          1.412580e+09
+LOS MICHES                  4.934082e+08
+VILLA DEL NAHUEVE           7.324361e+08
+LAS OVEJAS                  8.054277e+08
+PIEDRA DEL AGUILA           8.879936e+07
+EL CHOLAR                   8.000063e+07
+EL HUECU                    6.622500e+07
+TAQUIMILAN                  8.000048e+07
+LONCOPUE                    7.999999e+07
+COYUCO-COCHICO              8.331948e+08
+VILLA DEL CURI LEUVU        2.836002e+08
+TRICAO MALAL                7.996800e+07
+CHORRIACA                   1.882431e+09
+LOS CHIHUIDOS               1.584180e+09
+PASO AGUERRE                3.280814e+08
+VISTA ALEGRE                9.862338e+07
+NEUQUEN                     1.961178e+08
+ZAPALA                      4.491231e+08
+CHOS MALAL                  7.908135e+07
+MARIANO MORENO              9.131921e+07
+LOS CATUTOS                 1.093199e+08
+VILLA PUENTE PICUN LEUFU    1.498522e+08
+VILLA PUENTE PICUN LEUFU    7.781019e+07
+RAMON CASTRO                8.682819e+08
+OCTAVIO PICO                3.017004e+08
+BUTA RANQUIL                2.192030e+09
+BARRANCAS                   5.313627e+08
+Name: AREA, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;PERIMETRO&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">boundary</span>
+<span class="n">ejidos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+      <th>AREA</th>
+      <th>PERIMETRO</th>
+    </tr>
+    <tr>
+      <th>EJL_NOMBRE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAUZAL BONITO</th>
+      <td>56</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2504910.702 5743581.368, 25049...</td>
+      <td>1.851751e+08</td>
+      <td>MULTILINESTRING ((2504910.702 5743581.368, 250...</td>
+    </tr>
+    <tr>
+      <th>VILLA LA ANGOSTURA</th>
+      <td>29</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 11287/48</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2274351.75 5487270.5, 2274385 548722...</td>
+      <td>7.934321e+07</td>
+      <td>LINESTRING (2274351.75 5487270.5, 2274385 5487...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;CENTROIDE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">centroid</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+      <th>AREA</th>
+      <th>PERIMETRO</th>
+      <th>CENTROIDE</th>
+    </tr>
+    <tr>
+      <th>EJL_NOMBRE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAUZAL BONITO</th>
+      <td>56</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2504910.702 5743581.368, 25049...</td>
+      <td>1.851751e+08</td>
+      <td>MULTILINESTRING ((2504910.702 5743581.368, 250...</td>
+      <td>POINT (2498661.689 5731875.414)</td>
+    </tr>
+    <tr>
+      <th>VILLA LA ANGOSTURA</th>
+      <td>29</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 11287/48</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2274351.75 5487270.5, 2274385 548722...</td>
+      <td>7.934321e+07</td>
+      <td>LINESTRING (2274351.75 5487270.5, 2274385 5487...</td>
+      <td>POINT (2278512.775 5482417.552)</td>
+    </tr>
+    <tr>
+      <th>LAS LAJAS</th>
+      <td>38</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2393072.25 5734869, 2393175.5 573030...</td>
+      <td>8.600705e+07</td>
+      <td>LINESTRING (2393072.25 5734869, 2393175.5 5730...</td>
+      <td>POINT (2386122.753 5733223.844)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+      <th>AREA</th>
+      <th>PERIMETRO</th>
+      <th>CENTROIDE</th>
+    </tr>
+    <tr>
+      <th>EJL_NOMBRE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAUZAL BONITO</th>
+      <td>56</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2504910.702 5743581.368, 25049...</td>
+      <td>1.851751e+08</td>
+      <td>MULTILINESTRING ((2504910.702 5743581.368, 250...</td>
+      <td>POINT (2498661.689 5731875.414)</td>
+    </tr>
+    <tr>
+      <th>VILLA LA ANGOSTURA</th>
+      <td>29</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 11287/48</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2274351.75 5487270.5, 2274385 548722...</td>
+      <td>7.934321e+07</td>
+      <td>LINESTRING (2274351.75 5487270.5, 2274385 5487...</td>
+      <td>POINT (2278512.775 5482417.552)</td>
+    </tr>
+    <tr>
+      <th>LAS LAJAS</th>
+      <td>38</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2393072.25 5734869, 2393175.5 573030...</td>
+      <td>8.600705e+07</td>
+      <td>LINESTRING (2393072.25 5734869, 2393175.5 5730...</td>
+      <td>POINT (2386122.753 5733223.844)</td>
+    </tr>
+    <tr>
+      <th>AÑELO</th>
+      <td>36</td>
+      <td>2</td>
+      <td>DECRETO PROVINCIAL N 1109/73</td>
+      <td>None</td>
+      <td>6</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2508978.75 5748766, 2509042.25 57574...</td>
+      <td>8.618311e+07</td>
+      <td>LINESTRING (2508978.75 5748766, 2509042.25 575...</td>
+      <td>POINT (2517006.113 5754490.714)</td>
+    </tr>
+    <tr>
+      <th>QUILI MALAL</th>
+      <td>37</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2417448.602 5756111.094, 2417515.277...</td>
+      <td>3.692401e+08</td>
+      <td>LINESTRING (2417448.602 5756111.094, 2417515.2...</td>
+      <td>POINT (2434463.538 5748471.563)</td>
+    </tr>
+    <tr>
+      <th>BAJADA DEL AGRIO</th>
+      <td>17</td>
+      <td>3</td>
+      <td>DECRETO NACIONAL N 12625/52</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2408212.817 5748352.05, 2408249.865 ...</td>
+      <td>8.531626e+07</td>
+      <td>LINESTRING (2408212.817 5748352.05, 2408249.86...</td>
+      <td>POINT (2409900.469 5748891.919)</td>
+    </tr>
+    <tr>
+      <th>AGUADA SAN ROQUE</th>
+      <td>55</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>6</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2521130 5804885, 2521652.75 5801216,...</td>
+      <td>1.417109e+09</td>
+      <td>LINESTRING (2521130 5804885, 2521652.75 580121...</td>
+      <td>POINT (2505514.228 5797373.105)</td>
+    </tr>
+    <tr>
+      <th>VILLA TRAFUL</th>
+      <td>44</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 0768/69</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2289343.111 5499831.69, 2289354 5499...</td>
+      <td>7.056979e+07</td>
+      <td>LINESTRING (2289343.111 5499831.69, 2289354 54...</td>
+      <td>POINT (2297190.656 5495062.543)</td>
+    </tr>
+    <tr>
+      <th>HUINGANCO</th>
+      <td>49</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2322/00</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2353614.298 5894276.248, 2353579.902...</td>
+      <td>3.014459e+08</td>
+      <td>LINESTRING (2353614.298 5894276.248, 2353579.9...</td>
+      <td>POINT (2357684.788 5897170.962)</td>
+    </tr>
+    <tr>
+      <th>VARVARCO</th>
+      <td>50</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2352979.182 5948948.267, 2352912.507...</td>
+      <td>6.887802e+08</td>
+      <td>LINESTRING (2352979.182 5948948.267, 2352912.5...</td>
+      <td>POINT (2357526.65 5927217.564)</td>
+    </tr>
+    <tr>
+      <th>MANZANO AMARGO</th>
+      <td>52</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2346744 5924003, 2346335.5 5924379.5...</td>
+      <td>6.353362e+08</td>
+      <td>LINESTRING (2346744 5924003, 2346335.5 5924379...</td>
+      <td>POINT (2338464.959 5938475.781)</td>
+    </tr>
+    <tr>
+      <th>ANDACOLLO</th>
+      <td>16</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2321</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2353537.5 5893917, 2353644.25 589428...</td>
+      <td>3.383383e+08</td>
+      <td>LINESTRING (2353537.5 5893917, 2353644.25 5894...</td>
+      <td>POINT (2356908.963 5875065.899)</td>
+    </tr>
+    <tr>
+      <th>COPAHUE-CAVIAHUE</th>
+      <td>45</td>
+      <td>3</td>
+      <td>DECRETO PROVINCIAL N 2796/96</td>
+      <td>None</td>
+      <td>4</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2318788.415 5807801.773, 23187...</td>
+      <td>3.196155e+06</td>
+      <td>MULTILINESTRING ((2318788.415 5807801.773, 231...</td>
+      <td>POINT (2319987.351 5808431.345)</td>
+    </tr>
+    <tr>
+      <th>VILLA PEHUENIA</th>
+      <td>41</td>
+      <td>2</td>
+      <td>DECRETO PROVINCIAL N 0367/96</td>
+      <td>None</td>
+      <td>12</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2322362.018 5684817.825, 2322290.93 ...</td>
+      <td>1.534339e+08</td>
+      <td>LINESTRING (2322362.018 5684817.825, 2322290.9...</td>
+      <td>POINT (2311152.858 5691406.112)</td>
+    </tr>
+    <tr>
+      <th>SAN PATRICIO DEL CHAÑAR</th>
+      <td>5</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>6</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2544874.25 5737644.5, 2545662.5 5736...</td>
+      <td>9.643916e+07</td>
+      <td>LINESTRING (2544874.25 5737644.5, 2545662.5 57...</td>
+      <td>POINT (2556526.468 5728371.853)</td>
+    </tr>
+    <tr>
+      <th>PILO LIL</th>
+      <td>1</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>11</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2338503 5607762.5, 2338504.632 56077...</td>
+      <td>4.779059e+07</td>
+      <td>LINESTRING (2338503 5607762.5, 2338504.632 560...</td>
+      <td>POINT (2337039.059 5612247.063)</td>
+    </tr>
+    <tr>
+      <th>PLAZA HUINCUL</th>
+      <td>8</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2482495.25 5684768, 2481489.25 56905...</td>
+      <td>7.874095e+07</td>
+      <td>LINESTRING (2482495.25 5684768, 2481489.25 569...</td>
+      <td>POINT (2486140.915 5690036.767)</td>
+    </tr>
+    <tr>
+      <th>CENTENARIO</th>
+      <td>32</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 3332</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2576880.874 5705545.452, 25769...</td>
+      <td>1.301019e+08</td>
+      <td>MULTILINESTRING ((2576880.874 5705545.452, 257...</td>
+      <td>POINT (2571624.027 5705621.128)</td>
+    </tr>
+    <tr>
+      <th>RINCON DE LOS SAUCES</th>
+      <td>33</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 2095/95</td>
+      <td>None</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2545877.5 5847160, 2535891.5 5847262...</td>
+      <td>9.788575e+08</td>
+      <td>LINESTRING (2545877.5 5847160, 2535891.5 58472...</td>
+      <td>POINT (2508362.14 5857930.474)</td>
+    </tr>
+    <tr>
+      <th>CUTRAL CO</th>
+      <td>7</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2481111.75 5692743.5, 2481365.5 5691...</td>
+      <td>8.060311e+07</td>
+      <td>LINESTRING (2481111.75 5692743.5, 2481365.5 56...</td>
+      <td>POINT (2477965.434 5690104.127)</td>
+    </tr>
+    <tr>
+      <th>EL SAUCE</th>
+      <td>9</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>10</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2464575.5 5625854, 2464806.75 562562...</td>
+      <td>3.451968e+08</td>
+      <td>LINESTRING (2464575.5 5625854, 2464806.75 5625...</td>
+      <td>POINT (2454741.471 5629863.558)</td>
+    </tr>
+    <tr>
+      <th>PICUN LEUFU</th>
+      <td>10</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>10</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2471530.75 5618883, 2466960.5 562346...</td>
+      <td>1.386720e+08</td>
+      <td>LINESTRING (2471530.75 5618883, 2466960.5 5623...</td>
+      <td>POINT (2473850.542 5624876.517)</td>
+    </tr>
+    <tr>
+      <th>LAS COLORADAS</th>
+      <td>11</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>11</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2366804.5 5606870.5, 2361806.25 5606...</td>
+      <td>8.000675e+07</td>
+      <td>LINESTRING (2366804.5 5606870.5, 2361806.25 56...</td>
+      <td>POINT (2364089.138 5614800.629)</td>
+    </tr>
+    <tr>
+      <th>SANTO TOMAS</th>
+      <td>12</td>
+      <td>4</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>14</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2413527 5584793.5, 2409951.5 5581286...</td>
+      <td>8.752750e+07</td>
+      <td>LINESTRING (2413527 5584793.5, 2409951.5 55812...</td>
+      <td>POINT (2406374.273 5589526.175)</td>
+    </tr>
+    <tr>
+      <th>PLOTTIER</th>
+      <td>31</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2555986.217 5683098.62, 2555920.071 ...</td>
+      <td>1.428481e+08</td>
+      <td>LINESTRING (2555986.217 5683098.62, 2555920.07...</td>
+      <td>POINT (2562638.933 5688920.997)</td>
+    </tr>
+    <tr>
+      <th>SENILLOSA</th>
+      <td>40</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 24597/51</td>
+      <td>LEY PROVINCIAL N 2405/02</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2515665.596 5722247.215, 2515676.179...</td>
+      <td>1.430489e+09</td>
+      <td>LINESTRING (2515665.596 5722247.215, 2515676.1...</td>
+      <td>POINT (2527960.094 5693218.057)</td>
+    </tr>
+    <tr>
+      <th>VILLA EL CHOCON</th>
+      <td>6</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 769/73</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2521525 5654200, 2521646 5654017.5, ...</td>
+      <td>7.797920e+07</td>
+      <td>LINESTRING (2521525 5654200, 2521646 5654017.5...</td>
+      <td>POINT (2513749.556 5655019.38)</td>
+    </tr>
+    <tr>
+      <th>ALUMINE</th>
+      <td>43</td>
+      <td>2</td>
+      <td>DECRETO NACIONAL N 12828/53</td>
+      <td>None</td>
+      <td>12</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2338903.5 5650710.5, 2330903.5 56507...</td>
+      <td>8.000000e+07</td>
+      <td>LINESTRING (2338903.5 5650710.5, 2330903.5 565...</td>
+      <td>POINT (2334903.5 5655710.5)</td>
+    </tr>
+    <tr>
+      <th>COVUNCO ABAJO</th>
+      <td>58</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2420089.638 5721613.113, 2420081.171...</td>
+      <td>5.894167e+08</td>
+      <td>LINESTRING (2420089.638 5721613.113, 2420081.1...</td>
+      <td>POINT (2439780.258 5725789.007)</td>
+    </tr>
+    <tr>
+      <th>GUAÑACOS</th>
+      <td>13</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 0308/00</td>
+      <td>LEY PROVINCIAL N 2322/00</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2310907.967 5879406.081, 2348276 587...</td>
+      <td>5.988409e+08</td>
+      <td>LINESTRING (2310907.967 5879406.081, 2348276 5...</td>
+      <td>POINT (2328566.866 5871916.442)</td>
+    </tr>
+    <tr>
+      <th>SAN MARTIN DE LOS ANDES</th>
+      <td>18</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 2052/94</td>
+      <td>None</td>
+      <td>15</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2297971.25 5562786, 2297985.17 55654...</td>
+      <td>1.447529e+08</td>
+      <td>LINESTRING (2297971.25 5562786, 2297985.17 556...</td>
+      <td>POINT (2303859.714 5554917.861)</td>
+    </tr>
+    <tr>
+      <th>VILLA LAGO MELIQUINA</th>
+      <td>24</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL 2096/07</td>
+      <td>DECRETO PROVINCIAL 0052/11</td>
+      <td>15</td>
+      <td>MIGRA</td>
+      <td>mpaz</td>
+      <td>I</td>
+      <td>2015-11-12</td>
+      <td>2023/08/25</td>
+      <td>POLYGON ((2307274.384 5529452.078, 2307935 553...</td>
+      <td>1.079979e+08</td>
+      <td>LINESTRING (2307274.384 5529452.078, 2307935 5...</td>
+      <td>POINT (2312512.317 5525207.098)</td>
+    </tr>
+    <tr>
+      <th>JUNIN DE LOS ANDES</th>
+      <td>42</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL 29006</td>
+      <td>LEY PROVINCIAL N 2341</td>
+      <td>13</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2323170.862 5563973.503, 2323139.112...</td>
+      <td>1.412580e+09</td>
+      <td>LINESTRING (2323170.862 5563973.503, 2323139.1...</td>
+      <td>POINT (2320518.447 5579176.188)</td>
+    </tr>
+    <tr>
+      <th>LOS MICHES</th>
+      <td>14</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2340/00</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2310907.967 5879406.081, 2310922.463...</td>
+      <td>4.934082e+08</td>
+      <td>LINESTRING (2310907.967 5879406.081, 2310922.4...</td>
+      <td>POINT (2325495.483 5887299.315)</td>
+    </tr>
+    <tr>
+      <th>VILLA DEL NAHUEVE</th>
+      <td>15</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 3125/99</td>
+      <td>None</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2320279.5 5919614.5, 2320420.634 591...</td>
+      <td>7.324361e+08</td>
+      <td>LINESTRING (2320279.5 5919614.5, 2320420.634 5...</td>
+      <td>POINT (2329176.243 5901863.849)</td>
+    </tr>
+    <tr>
+      <th>LAS OVEJAS</th>
+      <td>19</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2389/02</td>
+      <td>1</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2349096.75 5911740, 2349549.29 59116...</td>
+      <td>8.054277e+08</td>
+      <td>LINESTRING (2349096.75 5911740, 2349549.29 591...</td>
+      <td>POINT (2328905.431 5921212.997)</td>
+    </tr>
+    <tr>
+      <th>PIEDRA DEL AGUILA</th>
+      <td>27</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>14</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2400909.75 5562474.5, 2400909.75 556...</td>
+      <td>8.879936e+07</td>
+      <td>LINESTRING (2400909.75 5562474.5, 2400909.75 5...</td>
+      <td>POINT (2407740.999 5565694.328)</td>
+    </tr>
+    <tr>
+      <th>EL CHOLAR</th>
+      <td>20</td>
+      <td>3</td>
+      <td>DECRETO PROVINCIAL N 0765/60</td>
+      <td>None</td>
+      <td>4</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2355750.25 5857467, 2355653.75 58494...</td>
+      <td>8.000063e+07</td>
+      <td>LINESTRING (2355750.25 5857467, 2355653.75 584...</td>
+      <td>POINT (2350702.375 5853527.5)</td>
+    </tr>
+    <tr>
+      <th>EL HUECU</th>
+      <td>21</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>4</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2363886.25 5831115.5, 2359132 582525...</td>
+      <td>6.622500e+07</td>
+      <td>LINESTRING (2363886.25 5831115.5, 2359132 5825...</td>
+      <td>POINT (2360267.982 5832160.905)</td>
+    </tr>
+    <tr>
+      <th>TAQUIMILAN</th>
+      <td>22</td>
+      <td>3</td>
+      <td>DECRETO PROVINCIAL N 0769/69</td>
+      <td>None</td>
+      <td>4</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2385381 5843805.5, 2384880.75 583381...</td>
+      <td>8.000048e+07</td>
+      <td>LINESTRING (2385381 5843805.5, 2384880.75 5833...</td>
+      <td>POINT (2381135.875 5839012)</td>
+    </tr>
+    <tr>
+      <th>LONCOPUE</th>
+      <td>23</td>
+      <td>2</td>
+      <td>DECRETO NACIONAL S/N 1931</td>
+      <td>None</td>
+      <td>5</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2361149 5788726.5, 2361049.5 5768727...</td>
+      <td>7.999999e+07</td>
+      <td>LINESTRING (2361149 5788726.5, 2361049.5 57687...</td>
+      <td>POINT (2359099.25 5778736.75)</td>
+    </tr>
+    <tr>
+      <th>COYUCO-COCHICO</th>
+      <td>2</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>2</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2377127.252 5978784.5, 2379302.015 5...</td>
+      <td>8.331948e+08</td>
+      <td>LINESTRING (2377127.252 5978784.5, 2379302.015...</td>
+      <td>POINT (2388130.372 5955578.183)</td>
+    </tr>
+    <tr>
+      <th>VILLA DEL CURI LEUVU</th>
+      <td>51</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>2</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2376516.99 5890559.145, 2376578 5890...</td>
+      <td>2.836002e+08</td>
+      <td>LINESTRING (2376516.99 5890559.145, 2376578 58...</td>
+      <td>POINT (2373032.786 5885556.565)</td>
+    </tr>
+    <tr>
+      <th>TRICAO MALAL</th>
+      <td>48</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>2</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2376490.5 5896794, 2371530.75 589679...</td>
+      <td>7.996800e+07</td>
+      <td>LINESTRING (2376490.5 5896794, 2371530.75 5896...</td>
+      <td>POINT (2378530.75 5899650)</td>
+    </tr>
+    <tr>
+      <th>CHORRIACA</th>
+      <td>53</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>5</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2405270.5 5778247.5, 2405212.25 5778...</td>
+      <td>1.882431e+09</td>
+      <td>LINESTRING (2405270.5 5778247.5, 2405212.25 57...</td>
+      <td>POINT (2408184.669 5802879.527)</td>
+    </tr>
+    <tr>
+      <th>LOS CHIHUIDOS</th>
+      <td>54</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>6</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2436828.75 5827378, 2437281.25 58247...</td>
+      <td>1.584180e+09</td>
+      <td>LINESTRING (2436828.75 5827378, 2437281.25 582...</td>
+      <td>POINT (2453139.128 5788715.998)</td>
+    </tr>
+    <tr>
+      <th>PASO AGUERRE</th>
+      <td>57</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>10</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2443731.25 5647561.5, 2442313 564617...</td>
+      <td>3.280814e+08</td>
+      <td>LINESTRING (2443731.25 5647561.5, 2442313 5646...</td>
+      <td>POINT (2431415.552 5645793.722)</td>
+    </tr>
+    <tr>
+      <th>VISTA ALEGRE</th>
+      <td>4</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 2026/93</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2569433.614 5715433.11, 2569492.881 ...</td>
+      <td>9.862338e+07</td>
+      <td>LINESTRING (2569433.614 5715433.11, 2569492.88...</td>
+      <td>POINT (2569502.334 5708820.295)</td>
+    </tr>
+    <tr>
+      <th>NEUQUEN</th>
+      <td>30</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2569098.384 5691099.793, 2572714.96 ...</td>
+      <td>1.961178e+08</td>
+      <td>LINESTRING (2569098.384 5691099.793, 2572714.9...</td>
+      <td>POINT (2572117.831 5695831.304)</td>
+    </tr>
+    <tr>
+      <th>ZAPALA</th>
+      <td>39</td>
+      <td>1</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>LEY PROVINCIAL N 2298/99</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2419375.75 5697158.5, 2418548.5 5696...</td>
+      <td>4.491231e+08</td>
+      <td>LINESTRING (2419375.75 5697158.5, 2418548.5 56...</td>
+      <td>POINT (2400782.01 5690274.551)</td>
+    </tr>
+    <tr>
+      <th>CHOS MALAL</th>
+      <td>47</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 99268/37</td>
+      <td>None</td>
+      <td>2</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2381861.728 5863390.576, 2382233.5 5...</td>
+      <td>7.908135e+07</td>
+      <td>LINESTRING (2381861.728 5863390.576, 2382233.5...</td>
+      <td>POINT (2387416.985 5865171.786)</td>
+    </tr>
+    <tr>
+      <th>MARIANO MORENO</th>
+      <td>46</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2403065.066 5706747.191, 2403077.861...</td>
+      <td>9.131921e+07</td>
+      <td>LINESTRING (2403065.066 5706747.191, 2403077.8...</td>
+      <td>POINT (2411702.255 5708642.031)</td>
+    </tr>
+    <tr>
+      <th>LOS CATUTOS</th>
+      <td>3</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2403065.066 5706747.191, 24080...</td>
+      <td>1.093199e+08</td>
+      <td>MULTILINESTRING ((2403065.066 5706747.191, 240...</td>
+      <td>POINT (2402992.454 5701574.692)</td>
+    </tr>
+    <tr>
+      <th>VILLA PUENTE PICUN LEUFU</th>
+      <td>25</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2409221.409 5655705.347, 2409217.391...</td>
+      <td>1.498522e+08</td>
+      <td>LINESTRING (2409221.409 5655705.347, 2409217.3...</td>
+      <td>POINT (2409192.289 5661043.661)</td>
+    </tr>
+    <tr>
+      <th>VILLA PUENTE PICUN LEUFU</th>
+      <td>59</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>DECRETO PROVINCIAL N 1333/10</td>
+      <td>11</td>
+      <td>mpaz</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2023-08-25</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2409221.409 5655705.347, 2409220 565...</td>
+      <td>7.781019e+07</td>
+      <td>LINESTRING (2409221.409 5655705.347, 2409220 5...</td>
+      <td>POINT (2401211.345 5657697.741)</td>
+    </tr>
+    <tr>
+      <th>RAMON CASTRO</th>
+      <td>28</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>8</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2434685 5706534.5, 2434734.75 570648...</td>
+      <td>8.682819e+08</td>
+      <td>LINESTRING (2434685 5706534.5, 2434734.75 5706...</td>
+      <td>POINT (2434361.531 5686614.944)</td>
+    </tr>
+    <tr>
+      <th>OCTAVIO PICO</th>
+      <td>26</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2548509.142 5845834.704, 2548592.422...</td>
+      <td>3.017004e+08</td>
+      <td>LINESTRING (2548509.142 5845834.704, 2548592.4...</td>
+      <td>POINT (2556359.326 5835188.191)</td>
+    </tr>
+    <tr>
+      <th>BUTA RANQUIL</th>
+      <td>34</td>
+      <td>2</td>
+      <td>DECRETO NACIONAL S/N 1931</td>
+      <td>LEY PROVINCIAL N 2299/99</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2430817.706 5907859.255, 2430820.881...</td>
+      <td>2.192030e+09</td>
+      <td>LINESTRING (2430817.706 5907859.255, 2430820.8...</td>
+      <td>POINT (2427146.038 5878260.86)</td>
+    </tr>
+    <tr>
+      <th>BARRANCAS</th>
+      <td>35</td>
+      <td>3</td>
+      <td>LEY PROVINCIAL N 2366/01</td>
+      <td>None</td>
+      <td>3</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2406467.509 5908504.5, 2406560.75 59...</td>
+      <td>5.313627e+08</td>
+      <td>LINESTRING (2406467.509 5908504.5, 2406560.75 ...</td>
+      <td>POINT (2416440.851 5920569.558)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defino como punto inicial a Neuquén</span>
+<span class="n">punto_inicial</span> <span class="o">=</span> <span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;CENTROIDE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">48</span><span class="p">]</span>
+<span class="n">punto_inicial</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7f610bd1523e411202d7fd6876cb7d5f27c02177f7f603460154a81d17453f17.svg" src="_images/7f610bd1523e411202d7fd6876cb7d5f27c02177f7f603460154a81d17453f17.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;DISTANCIA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;CENTROIDE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">punto_inicial</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;DISTANCIA&quot;</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EJL_NOMBRE
+SAUZAL BONITO                81822.874019
+VILLA LA ANGOSTURA          362972.944522
+LAS LAJAS                   189716.554818
+AÑELO                        80487.439570
+QUILI MALAL                 147376.054229
+BAJADA DEL AGRIO            170674.841609
+AGUADA SAN ROQUE            121436.310209
+VILLA TRAFUL                340430.678594
+HUINGANCO                   294141.442749
+VARVARCO                    315577.211979
+MANZANO AMARGO              336853.094383
+ANDACOLLO                   280071.235927
+COPAHUE-CAVIAHUE            276131.396999
+VILLA PEHUENIA              261002.489333
+SAN PATRICIO DEL CHAÑAR      36082.931930
+PILO LIL                    249496.201078
+PLAZA HUINCUL                86171.960341
+CENTENARIO                    9802.270351
+RINCON DE LOS SAUCES        174186.478534
+CUTRAL CO                    94326.424506
+EL SAUCE                    134643.801386
+PICUN LEUFU                 121206.608332
+LAS COLORADAS               223253.012116
+SANTO TOMAS                 196905.325874
+PLOTTIER                     11730.381459
+SENILLOSA                    44234.995456
+VILLA EL CHOCON              71221.265201
+ALUMINE                     240583.286543
+COVUNCO ABAJO               135686.024569
+GUAÑACOS                    300537.932553
+SAN MARTIN DE LOS ANDES     303016.527237
+VILLA LAGO MELIQUINA        310656.792130
+JUNIN DE LOS ANDES          277327.723255
+LOS MICHES                  312222.007720
+VILLA DEL NAHUEVE           318543.600229
+LAS OVEJAS                  331585.855203
+PIEDRA DEL AGUILA           209655.373279
+EL CHOLAR                   271832.475228
+EL HUECU                    251924.827801
+TAQUIMILAN                  238693.986946
+LONCOPUE                    228583.089829
+COYUCO-COCHICO              318307.754298
+VILLA DEL CURI LEUVU        275010.054592
+TRICAO MALAL                281101.438997
+CHORRIACA                   195789.181950
+LOS CHIHUIDOS               150942.036105
+PASO AGUERRE                149334.827876
+VISTA ALEGRE                 13249.706572
+NEUQUEN                          0.000000
+ZAPALA                      171425.905593
+CHOS MALAL                  250580.529169
+MARIANO MORENO              160926.293329
+LOS CATUTOS                 169222.870249
+VILLA PUENTE PICUN LEUFU    166598.056344
+VILLA PUENTE PICUN LEUFU    175109.096569
+RAMON CASTRO                138064.258813
+OCTAVIO PICO                140245.044184
+BUTA RANQUIL                233017.948037
+BARRANCAS                   273390.938047
+Name: DISTANCIA, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;DISTANCIA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(198391.892690686)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/5d55bcd1fa67b252f93c270dd58da9e051cb585f449406c9d6176a430243ae9a.png" src="_images/5d55bcd1fa67b252f93c270dd58da9e051cb585f449406c9d6176a430243ae9a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;AREA&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/5c0918c49b150f3f2bfa114f268deedc393be020db2be4452f14e75135fd5034.png" src="_images/5c0918c49b150f3f2bfa114f268deedc393be020db2be4452f14e75135fd5034.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">set_geometry</span><span class="p">(</span><span class="s2">&quot;CENTROIDE&quot;</span><span class="p">)</span>
+<span class="n">ejidos</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/b35139f96fae04f75738212815099996c32ff1200b10cf8dea75a4c627edcf5c.png" src="_images/b35139f96fae04f75738212815099996c32ff1200b10cf8dea75a4c627edcf5c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;AREA&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/102c629ba2071cea94937e221f08e3721544dc28d016023f5ab4edac696200c8.png" src="_images/102c629ba2071cea94937e221f08e3721544dc28d016023f5ab4edac696200c8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_CATA18</th>
+      <th>EJL_CATEGO</th>
+      <th>EJL_NORMA_</th>
+      <th>EJL_NORMA1</th>
+      <th>RELA_CATA2</th>
+      <th>EJL_USR_AL</th>
+      <th>EJL_USR_BA</th>
+      <th>EJL_ESTADO</th>
+      <th>EJL_ALTA</th>
+      <th>EJL_BAJA</th>
+      <th>geometry</th>
+      <th>AREA</th>
+      <th>PERIMETRO</th>
+      <th>CENTROIDE</th>
+      <th>DISTANCIA</th>
+    </tr>
+    <tr>
+      <th>EJL_NOMBRE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SAUZAL BONITO</th>
+      <td>56</td>
+      <td>4</td>
+      <td>DECRETO PROVINCIAL N 1887/06</td>
+      <td>None</td>
+      <td>9</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>MULTIPOLYGON (((2504910.702 5743581.368, 25049...</td>
+      <td>1.851751e+08</td>
+      <td>MULTILINESTRING ((2504910.702 5743581.368, 250...</td>
+      <td>POINT (2498661.689 5731875.414)</td>
+      <td>81822.874019</td>
+    </tr>
+    <tr>
+      <th>VILLA LA ANGOSTURA</th>
+      <td>29</td>
+      <td>1</td>
+      <td>DECRETO NACIONAL N 11287/48</td>
+      <td>None</td>
+      <td>16</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2274351.75 5487270.5, 2274385 548722...</td>
+      <td>7.934321e+07</td>
+      <td>LINESTRING (2274351.75 5487270.5, 2274385 5487...</td>
+      <td>POINT (2278512.775 5482417.552)</td>
+      <td>362972.944522</td>
+    </tr>
+    <tr>
+      <th>LAS LAJAS</th>
+      <td>38</td>
+      <td>2</td>
+      <td>LEY PROVINCIAL N 1355/82</td>
+      <td>None</td>
+      <td>7</td>
+      <td>MIGRA</td>
+      <td>None</td>
+      <td>A</td>
+      <td>2015-11-12</td>
+      <td>0000/00/00</td>
+      <td>POLYGON ((2393072.25 5734869, 2393175.5 573030...</td>
+      <td>8.600705e+07</td>
+      <td>LINESTRING (2393072.25 5734869, 2393175.5 5730...</td>
+      <td>POINT (2386122.753 5733223.844)</td>
+      <td>189716.554818</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">set_geometry</span><span class="p">(</span><span class="s2">&quot;geometry&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/5d55bcd1fa67b252f93c270dd58da9e051cb585f449406c9d6176a430243ae9a.png" src="_images/5d55bcd1fa67b252f93c270dd58da9e051cb585f449406c9d6176a430243ae9a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;envolvente&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">convex_hull</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;envolvente&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/fa7612efde78a073bf8ded4706b97e76ed85ec405d8f4cb7f035a9ca96b24d38.png" src="_images/fa7612efde78a073bf8ded4706b97e76ed85ec405d8f4cb7f035a9ca96b24d38.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axis</span> <span class="o">=</span> <span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;envolvente&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;PERIMETRO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axis</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/4dc96257947186d069122c1734d36d450832e7bfad02495cfa87996bc4cf014d.png" src="_images/4dc96257947186d069122c1734d36d450832e7bfad02495cfa87996bc4cf014d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;buffer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;buffer_centroide&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;CENTROIDE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axis</span> <span class="o">=</span> <span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;buffer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;buffer_centroide&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axis</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;PERIMETRO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axis</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/d7ec15669e577a0947edff489b15d72c3d54acb5ab57724173d6eebc32750f8a.png" src="_images/d7ec15669e577a0947edff489b15d72c3d54acb5ab57724173d6eebc32750f8a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neuquen</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;NEUQUEN&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
+<span class="n">neuquen</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/37baeea2e81e00fb69ecde3e3db34fecd632f9967b76b70c2f2a741485b92693.svg" src="_images/37baeea2e81e00fb69ecde3e3db34fecd632f9967b76b70c2f2a741485b92693.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="p">[</span><span class="s2">&quot;buffer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">neuquen</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EJL_NOMBRE
+SAUZAL BONITO               False
+VILLA LA ANGOSTURA          False
+LAS LAJAS                   False
+AÑELO                       False
+QUILI MALAL                 False
+BAJADA DEL AGRIO            False
+AGUADA SAN ROQUE            False
+VILLA TRAFUL                False
+HUINGANCO                   False
+VARVARCO                    False
+MANZANO AMARGO              False
+ANDACOLLO                   False
+COPAHUE-CAVIAHUE            False
+VILLA PEHUENIA              False
+SAN PATRICIO DEL CHAÑAR      True
+PILO LIL                    False
+PLAZA HUINCUL               False
+CENTENARIO                   True
+RINCON DE LOS SAUCES        False
+CUTRAL CO                   False
+EL SAUCE                    False
+PICUN LEUFU                 False
+LAS COLORADAS               False
+SANTO TOMAS                 False
+PLOTTIER                     True
+SENILLOSA                   False
+VILLA EL CHOCON             False
+ALUMINE                     False
+COVUNCO ABAJO               False
+GUAÑACOS                    False
+SAN MARTIN DE LOS ANDES     False
+VILLA LAGO MELIQUINA        False
+JUNIN DE LOS ANDES          False
+LOS MICHES                  False
+VILLA DEL NAHUEVE           False
+LAS OVEJAS                  False
+PIEDRA DEL AGUILA           False
+EL CHOLAR                   False
+EL HUECU                    False
+TAQUIMILAN                  False
+LONCOPUE                    False
+COYUCO-COCHICO              False
+VILLA DEL CURI LEUVU        False
+TRICAO MALAL                False
+CHORRIACA                   False
+LOS CHIHUIDOS               False
+PASO AGUERRE                False
+VISTA ALEGRE                 True
+NEUQUEN                      True
+ZAPALA                      False
+CHOS MALAL                  False
+MARIANO MORENO              False
+LOS CATUTOS                 False
+VILLA PUENTE PICUN LEUFU    False
+VILLA PUENTE PICUN LEUFU    False
+RAMON CASTRO                False
+OCTAVIO PICO                False
+BUTA RANQUIL                False
+BARRANCAS                   False
+dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">localidad29</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;ID_CATA18 == 29&quot;</span><span class="p">)</span>
+<span class="n">localidad29</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/60cce9b46a1b9349533af8308c240a5acf22c13892cb9b581bc1d8660ffb6ddd.png" src="_images/60cce9b46a1b9349533af8308c240a5acf22c13892cb9b581bc1d8660ffb6ddd.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Projected CRS: PROJCS[&quot;POSGAR 94 / Argentina 2&quot;,GEOGCS[&quot;WGS 84&quot;,D ...&gt;
+Name: POSGAR 94 / Argentina 2
+Axis Info [cartesian]:
+- [east]: Easting (metre)
+- [north]: Northing (metre)
+Area of Use:
+- undefined
+Coordinate Operation:
+- name: unnamed
+- method: Transverse Mercator
+Datum: World Geodetic System 1984
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">set_geometry</span><span class="p">(</span><span class="s2">&quot;geometry&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos_4326</span> <span class="o">=</span> <span class="n">ejidos</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+<span class="n">ejidos_4326</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Geographic 2D CRS: EPSG:4326&gt;
+Name: WGS 84
+Axis Info [ellipsoidal]:
+- Lat[north]: Geodetic latitude (degree)
+- Lon[east]: Geodetic longitude (degree)
+Area of Use:
+- name: World.
+- bounds: (-180.0, -90.0, 180.0, 90.0)
+Datum: World Geodetic System 1984 ensemble
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejidos_4326</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="_images/7d4a60fffe740c52ebe599165b9cb0bd836393e25b5b7b434d7f83f02ec373a1.png" src="_images/7d4a60fffe740c52ebe599165b9cb0bd836393e25b5b7b434d7f83f02ec373a1.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
