@@ -13,7 +13,7 @@ kernelspec:
 
 ```{code-cell} ipython3
 from IPython.display import Image
-Image(filename='imagenes/matplotlib.png', width=400, height=100)
+Image(filename='imagenes/matplotlib.png', width=400, height=90)
 ```
 
 
