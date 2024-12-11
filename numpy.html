@@ -367,7 +367,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -383,6 +385,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-arreglos-y-operaciones-simples">Creación de Arreglos y Operaciones Simples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexacion-y-slicing">Indexación y Slicing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-con-matrices">Operaciones con matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformar-una-imagen-satelital">Transformar una imágen satelital</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -406,6 +419,213 @@ document.write(`
 <a class="reference internal image-reference" href="_images/f00a1bc1e06c45cbd208fd80d86d2fad34382c3fadfb41718fc509eb8c2e913c.png"><img alt="_images/f00a1bc1e06c45cbd208fd80d86d2fad34382c3fadfb41718fc509eb8c2e913c.png" src="_images/f00a1bc1e06c45cbd208fd80d86d2fad34382c3fadfb41718fc509eb8c2e913c.png" style="width: 400px; height: 150px;" /></a>
 </div>
 </div>
+<blockquote>
+<div><p>¿Porqué es útil aprender Numpy?</p>
+</div></blockquote>
+<p>Las imágenes satelitales se suelen aplanar (convertir de una matriz multidimensional a un vector unidimensional) en ciertas aplicaciones debido a razones prácticas y computacionales. Aquí están las principales razones:</p>
+<ol class="arabic simple">
+<li><p><strong>Facilitar el análisis y procesamiento</strong></p>
+<ul class="simple">
+<li><p>Estadísticas globales: Convertir la matriz en un vector permite calcular fácilmente estadísticas globales como el promedio, la mediana o la desviación estándar de todos los píxeles.</p></li>
+<li><p>Comparaciones: Aplanar facilita comparar imágenes o regiones usando técnicas como la distancia euclidiana entre vectores.</p></li>
+</ul>
+</li>
+<li><p><strong>Entrenamiento de modelos de aprendizaje automático</strong></p>
+<ul class="simple">
+<li><p>Los algoritmos clásicos de aprendizaje automático, como máquinas de soporte vectorial (SVM) o regresión logística, requieren que los datos de entrada estén en formato vectorial.</p></li>
+<li><p>Aplanar la imagen permite representar cada píxel (o conjunto de características derivadas de los píxeles) como un único valor en un vector, haciendo que cada imagen sea una fila de un dataset tabular.</p></li>
+</ul>
+</li>
+</ol>
+<p>Ejemplo: Una imagen de 100x100 píxeles con 3 bandas (RGB) se convierte en un vector de tamaño 100 × 100 × 3 = 30000. Este vector puede usarse como entrada para un modelo.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Reducción de dimensionalidad</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Las imágenes satelitales suelen ser grandes (pueden tener miles o millones de píxeles). Aplanarlas es un paso previo para aplicar técnicas de reducción de dimensionalidad como PCA (Análisis de Componentes Principales), que simplifican los datos manteniendo la mayor parte de la información.</p></li>
+<li><p>Esto es especialmente útil en aplicaciones donde es necesario procesar grandes cantidades de datos satelitales con rapidez y eficiencia.</p></li>
+</ul>
+<ol class="arabic" start="4">
+<li><p><strong>Compresión y almacenamiento</strong></p>
+<ul class="simple">
+<li><p>Al aplanar la imagen, es más sencillo aplicar métodos de compresión (como JPEG o PNG) o serializarla para su almacenamiento o transmisión.</p></li>
+</ul>
+</li>
+<li><p><strong>Visualización de datos</strong></p>
+<ul class="simple">
+<li><p>En estudios exploratorios, convertir una imagen en un vector permite crear gráficos como histogramas o analizar la distribución de valores de los píxeles.
+Ejemplo práctico: Supongamos que queremos clasificar terrenos (agua, vegetación, urbano) basándonos en imágenes satelitales. Un flujo típico sería:</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Imagen original: Una matriz de tamaño 1000×1000 (1.000.000 píxeles).</p></li>
+<li><p>Aplanamiento: La matriz se convierte en un vector de tamaño 1,000,000.</p></li>
+<li><p>Modelado: El vector se utiliza como entrada en un clasificador o red neuronal.</p></li>
+</ol>
+</li>
+</ol>
+<p>Aunque el aplanamiento es útil, no siempre es necesario ni recomendable. Por ejemplo, redes neuronales convolucionales (CNN) trabajan directamente con datos en formato matricial porque aprovechan la estructura espacial de la imagen. Sin embargo, en análisis más simples, aplanar sigue siendo una práctica común y efectiva.</p>
+<section id="creacion-de-arreglos-y-operaciones-simples">
+<h2>Creación de Arreglos y Operaciones Simples<a class="headerlink" href="#creacion-de-arreglos-y-operaciones-simples" title="Link to this heading">#</a></h2>
+<p>Crear un arreglo de Numpy que contenga los números del 1 al 10:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="c1"># Creación del arreglo</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Creación del arreglo</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Multiplicar todos los elementos del arreglo por 2, luego sumar los elementos del arreglo y finalmente crear un nuevo arreglo con el cuadrado de cada elemento:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Operaciones</span>
+<span class="n">arr_mult</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">suma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="n">arr_cuadrado</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="indexacion-y-slicing">
+<h2>Indexación y Slicing<a class="headerlink" href="#indexacion-y-slicing" title="Link to this heading">#</a></h2>
+<p>Dado el siguiente arreglo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Selecciona los elementos en las posiciones pares.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pares</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Selecciona los elementos mayores a 15.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mayores</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">arr</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Invierte el orden del arreglo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">invertido</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="operaciones-con-matrices">
+<h2>Operaciones con matrices<a class="headerlink" href="#operaciones-con-matrices" title="Link to this heading">#</a></h2>
+<p>Crea una matriz de 3x3 con números aleatorios entre 0 y 1 usando np.random.rand.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matriz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Luego: Encontrar el valor máximo de la matriz.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">matriz</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Encontrar la suma de los valores de cada fila.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">suma_filas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">matriz</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Multiplica cada elemento por 10.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matriz_mult</span> <span class="o">=</span> <span class="n">matriz</span> <span class="o">*</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="transformar-una-imagen-satelital">
+<h2>Transformar una imágen satelital<a class="headerlink" href="#transformar-una-imagen-satelital" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Objetivo:</strong> Utilizar NumPy para procesar una imagen satelital.</p></li>
+<li><p><strong>Contexto:</strong> Supongamos que tienes una imagen satelital representada como una matriz de 3 dimensiones (alto, ancho, y bandas de color). Por ejemplo, una imagen de 100x100 píxeles con 3 bandas RGB puede representarse como un arreglo de forma (100, 100, 3).</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Cargar la matriz de la imagen satelital (se usa np.random.randint para simular una matriz con valores entre 0 y 255).</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear una matriz simulada de 100x100x3 (valores de 0 a 255)</span>
+<span class="n">imagen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Normalizar los valores para que estén en el rango [0, 1].</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalización</span>
+<span class="n">imagen_normalizada</span> <span class="o">=</span> <span class="n">imagen</span> <span class="o">/</span> <span class="mf">255.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Convertir la matriz en un vector unidimensional.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transformación en vector</span>
+<span class="c1"># La función .ravel() aplana la matriz en un vector unidimensional.</span>
+<span class="n">vector</span> <span class="o">=</span> <span class="n">imagen_normalizada</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Calcular el promedio de cada banda (R, G, B).</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Promedio por banda</span>
+<span class="n">promedios</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">imagen_normalizada</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tamaño del vector: </span><span class="si">{</span><span class="n">vector</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Promedios de las bandas: </span><span class="si">{</span><span class="n">promedios</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -462,6 +682,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-arreglos-y-operaciones-simples">Creación de Arreglos y Operaciones Simples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexacion-y-slicing">Indexación y Slicing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-con-matrices">Operaciones con matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformar-una-imagen-satelital">Transformar una imágen satelital</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

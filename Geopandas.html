@@ -405,6 +405,20 @@ document.write(`
 <a class="reference internal image-reference" href="_images/a5a83020f087f2c6c0c7162f8ca96940747dc619ac4d91446940a18d326104bf.png"><img alt="_images/a5a83020f087f2c6c0c7162f8ca96940747dc619ac4d91446940a18d326104bf.png" src="_images/a5a83020f087f2c6c0c7162f8ca96940747dc619ac4d91446940a18d326104bf.png" style="width: 300px; height: 100px;" /></a>
 </div>
 </div>
+<ol class="arabic simple">
+<li><p>Introducción al Uso de GeoPandas</p></li>
+</ol>
+<p>El análisis de datos geoespaciales es una disciplina esencial en diversos campos, desde la planificación urbana hasta la gestión ambiental. <strong>GeoPandas</strong> una biblioteca de Python basada en <em>pandas</em> y <em>shapely</em>, se destaca como una herramienta poderosa y accesible para trabajar con datos vectoriales en entornos de código abierto. Su versatilidad permite realizar desde tareas básicas de lectura y escritura hasta análisis complejos de geometrías espaciales.</p>
+<p>GeoPandas es compatible con una amplia variedad de formatos geoespaciales, incluidos <strong>Shapefile</strong>, <strong>GeoJSON</strong>, <strong>GML</strong> y archivos comprimidos como <strong>.zip</strong>, lo que la convierte en una opción ideal para integrar datos provenientes de diversas fuentes. En este capítulo, se explorará su potencial mediante ejemplos prácticos que permitirán comprender su uso y aplicarlo en tus propios proyectos.</p>
+<p>Las secciones del capítulo incluyen:</p>
+<ul class="simple">
+<li><p><strong>Lectura y manipulación de datos geoespaciales:</strong> Donde es posible aprender a cargar un archivo Shapefile utilizando gpd.read_file(), una función clave que también admite formatos como .zip y .gml. Además, se ejemplifica cómo establecer índices y realizar inspecciones iniciales de los datos con métodos como .head() y .tail().</p></li>
+<li><p><strong>Cálculo de propiedades geométricas:</strong> Describe cómo calcular áreas, perímetros y centroides para cada geometría en tu conjunto de datos. Estas métricas son fundamentales para el análisis espacial y la toma de decisiones basada en datos.</p></li>
+<li><p><strong>Análisis de distancias y relaciones espaciales:</strong> Utiliza herramientas como .distance() y .intersects() para evaluar la proximidad entre objetos geográficos y determinar relaciones espaciales clave, como superposiciones y buffers.</p></li>
+<li><p><strong>Manipulación de geometrías y reproyección:</strong> Detalla como crear envolventes convexas, buffers alrededor de geometrías y a cambiar el sistema de referencia espacial (CRS) con métodos como .to_crs(). La flexibilidad en la gestión de sistemas de coordenadas es crucial para trabajar con datos provenientes de diferentes fuentes.</p></li>
+<li><p><strong>Visualización:</strong> GeoPandas incluye capacidades nativas para graficar geometrías y atributos, lo que permite crear mapas rápidos y efectivos con métodos como .plot() y especificar características visuales como colores, leyendas y transparencias.</p></li>
+</ul>
+<p>GeoPandas no solo simplifica tareas complejas, sino que también habilita a los usuarios para integrar análisis geoespaciales directamente en sus flujos de trabajo con Python. A lo largo de este capítulo, se ejemplifica a combinar potentes capacidades de análisis con un enfoque práctico, utilizando datos reales como los ejidos de gobiernos locales.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ee</span>

@@ -16,6 +16,17 @@ from IPython.display import Image
 Image(filename='imagenes/folium.png', width=300, height=100)
 ```
 
+El objetivo principal de este capítulo es guiar paso a paso en el uso de Folium para crear mapas visualmente impactantes que sean también funcionales. Desde un simple mapa base de un proveedor internacional (CartoDB, OpenStreetMap) o un mapa base Argenmap hasta la inclusión de datos complejos como GeoJSON o mapas coropléticos con tooltips y popups, exploraremos cómo maximizar el potencial de esta biblioteca en proyectos.
+
+Las secciones del capítulo cubren:
+
+1. **Creación de mapas básicos:** Aprende a inicializar un mapa con Folium, definiendo coordenadas específicas y explorando los diferentes proveedores de teselas disponibles, como **CartoDB** y **Argenmap**.
+2. **Mapas coropléticos:** Descubre cómo combinar datos estadísticos con geometrías geográficas para representar patrones espaciales, como la densidad de población o los ingresos por región, usando capas coropléticas.
+3. **Integración de datos GeoJSON:** Aprende a cargar archivos GeoJSON desde URLs, convertir datos en un DataFrame, y enriquecer tus mapas con información detallada, destacando elementos individuales con **popups** y **tooltips**.
+
+A medida que avances en la práctica guiada, exploraremos cómo mantener múltiples capas de información sin interferir entre ellas, logrando mapas informativos y visualmente atractivos. Folium no solo facilita la creación de mapas interactivos, sino que también abre un abanico de posibilidades para analizar y comunicar datos geoespaciales de manera efectiva.
+
+Este capítulo es una invitación a conocer Folium, desde los conceptos básicos hasta las configuraciones más avanzadas, para que puedas crear mapas que no solo informen, sino que también sorprendan.
 
 ## Creando un mapa
 
